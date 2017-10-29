@@ -6,4 +6,4 @@ chmod +x <name_of_file_>
 
 Archlog.sh is a system maintenence tool designed to give users a way to diagnose problems with a system.
 
-https://i.imgur.com/dY3PgTu.png
+![alt text](https://i.imgur.com/dY3PgTu.png)

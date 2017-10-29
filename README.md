@@ -4,6 +4,21 @@ chmod +x <name_of_file_>
 
 # Archlog.sh
 
-Archlog.sh is a system maintenence tool designed to give users a way to diagnose problems with a system.
+Archlog.sh is a system maintenence tool designed to give users a way to diagnose problems with a system. Through a graphical user interface.
 
 ![alt text](https://i.imgur.com/dY3PgTu.png)
+
+Its made possible with whiptail BASH scripts and allows the user to:
+
+1) Check for failed systemd services.
+2) Check network connection.
+3) Display the results of the network connection diagnostic.
+4) Display status of WPA_Supplicant.
+5) Generates a list of all installed packages.
+6) Back up the entire pacman database in the active directory.
+7) Create a dmesg.txt file.
+
+# Logging
+
+The results of Archlog.sh can be found in /var/log/archlog for closer inspection later on.
+

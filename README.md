@@ -18,7 +18,7 @@ Its made possible with whiptail BASH scripts and allows the user to:
 6) Back up the entire pacman database in the active directory.
 7) Create a dmesg.txt file.
 
-# Logging
+Logging:
 
 The results of Archlog.sh can be found in /var/log/archlog for closer inspection later on.
 
@@ -27,3 +27,10 @@ The results of Archlog.sh can be found in /var/log/archlog for closer inspection
 Pacman+ is a GUI friendly way to update MorpheusArch Linux and Arch Linux. 
 
 ![alt text](https://i.imgur.com/e9BuoZ4.png)
+
+# Sec_Audit.sh
+
+sec_audit.sh aids in performing a basic security audit against a server through penetration testing techniques. You'll likely need to install the tools first and have some user / pass lists for hydra's attacks.
+
+![alt text](https://i.imgur.com/QxCDQNu.png)
+

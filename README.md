@@ -34,3 +34,15 @@ sec_audit.sh aids in performing a basic security audit against a server through 
 
 ![alt text](https://i.imgur.com/QxCDQNu.png)
 
+# Nmap Tools 
+1) Full TCP port scan against a host.
+2) Verbose stealth scan.
+3) Stealth Syn with OS Detection.
+4) Stealth Syn with Full TCP range.
+5) Scan from list of hosts within a file.
+
+# Hydra Tools
+1) Get username and password lists through wget. Renaming the file as users.txt and pass.txt.
+2) Enter custom Hydra command
+3) Attack FTP service
+4) Attack SSH service.

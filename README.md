@@ -22,3 +22,8 @@ Its made possible with whiptail BASH scripts and allows the user to:
 
 The results of Archlog.sh can be found in /var/log/archlog for closer inspection later on.
 
+# Pacman+.sh
+
+Pacman+ is a GUI friendly way to update MorpheusArch Linux and Arch Linux. 
+
+![alt text](https://i.imgur.com/e9BuoZ4.png)

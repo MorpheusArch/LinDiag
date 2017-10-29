@@ -3,3 +3,7 @@ A collection of tools to be used with MorpheusArch Linux. If you're getting a pe
 chmod +x <name_of_file_>
 
 # Archlog.sh
+
+Archlog.sh is a system maintenence tool designed to give users a way to diagnose problems with a system.
+
+https://i.imgur.com/dY3PgTu.png

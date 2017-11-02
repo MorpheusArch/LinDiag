@@ -58,9 +58,3 @@ sec_audit.sh aids in performing a basic security audit against a server through 
 
 # Lynis Tools
 This option just has lynis auditing software audit the system and put the output in lynis.log within the active directory.
-
-# Cleaner.sh
-This exists so you can safely delete all log entries contained within /var/log upon successful penetration testing of a server. It makes use of the shred utility to overwrite data before deleting them making any attempts at recovering the data, quite impossible.
-
-
-![alt text](https://i.imgur.com/7awaSGo.png)

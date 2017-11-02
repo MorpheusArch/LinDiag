@@ -2,6 +2,14 @@
 A collection of tools to be used with MorpheusArch Linux. If you're getting a permission denied error. You may need to make the shell scripts executable with the command:
 chmod +x <name_of_file_>
 
+# data_rec.sh
+
+data_rec.sh is a whiptail BASH shell script that provides a GUI to the user for using ddrescue to recover data on HDD either through HDD failure or accidental deletion.
+
+![alt text](https://i.imgur.com/3UGRlnd.png)
+
+It allows the user to display all mounted drives. Use ddrescue for creating .img and logfile and then copy the recovered data to a new disk.
+
 # Archlog.sh
 
 Archlog.sh is a system maintenence tool designed to give users a way to diagnose problems with a system. Through a graphical user interface.

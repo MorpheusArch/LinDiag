@@ -57,7 +57,7 @@ fi
 }
 
 yFail(){
-DRIVE=$(whiptail --inputbox "What is the drive you're attempting to recover data on?" 8 78 Blue --title "Input Format /dev/sdX" 3>&1 1>&2 2>&3)
+DRIVE=$(whiptail --inputbox "What is the drive you're attempting to recover data on?" 8 78 --title "Input Format /dev/sdX" 3>&1 1>&2 2>&3)
 
 exitstatus=$?
 if [ $exitstatus = 0 ]; then
@@ -75,7 +75,7 @@ fi
 }
 
 nFail(){
-DRIVE=$(whiptail --inputbox "What is the drive you're attempting to recover data on?" 8 78 Blue --title "Input Format /dev/sdX" 3>&1 1>&2 2>&3)
+DRIVE=$(whiptail --inputbox "What is the drive you're attempting to recover data on?" 8 78 --title "Input Format /dev/sdX" 3>&1 1>&2 2>&3)
 
 exitstatus=$?
 if [ $exitstatus = 0 ]; then
@@ -92,7 +92,7 @@ fi
 }
 
 yRestore(){
-DRIVE_R=$(whiptail --inputbox "What is the drive you want the new .img to go to?" 8 78 Blue --title "Input Format /dev/sdX" 3>&1 1>&2 2>&3)
+DRIVE_R=$(whiptail --inputbox "What is the drive you want the new .img to go to?" 8 78 --title "Input Format /dev/sdX" 3>&1 1>&2 2>&3)
 
 exitstatus=$?
 if [ $exitstatus = 0 ]; then

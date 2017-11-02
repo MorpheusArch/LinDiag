@@ -4,7 +4,7 @@ chmod +x <name_of_file_>
 
 # data_rec.sh
 
-data_rec.sh is a whiptail BASH shell script that provides a GUI to the user for using ddrescue to recover data on HDD either through HDD failure or accidental deletion.
+data_rec.sh is a whiptail BASH shell script that provides a GUI to the user for using ddrescue that allows them to recover data on a HDD / SSD either through device failure or accidental deletion.
 
 ![alt text](https://i.imgur.com/3UGRlnd.png)
 

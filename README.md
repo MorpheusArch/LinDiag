@@ -10,25 +10,26 @@ data_rec.sh is a whiptail BASH shell script that provides a GUI to the user for 
 
 It allows the user to display all mounted drives. Use ddrescue for creating .img and logfile and then copy the recovered data to a new disk.
 
-# Archlog.sh
+# arch_diagnostic.sh
 
-Archlog.sh is a system maintenence tool designed to give users a way to diagnose problems with a system. Through a graphical user interface.
+This is script that helps in diagnosing issues with systemd and diagnosing network issues.
 
-![alt text](https://i.imgur.com/DxYhWDP.png)
+![alt text](https://i.imgur.com/6Bi483l.png)
 
-Its made possible with whiptail BASH scripts and allows the user to:
+# Systemd Diagnostics
 
-1) Check for failed systemd services.
-2) Check network connection.
-3) Display the results of the network connection diagnostic.
-4) Display status of WPA_Supplicant.
-5) Generates a list of all installed packages.
-6) Back up the entire pacman database in the active directory.
-7) Create a dmesg.txt file.
+1) Check for failed services.
+2) Start, stop and restart systemd units.
+3) Check if a systemd unit is enabled or not.
+4) Enable a unit at boot.
+5) Show man page of units.
 
-Logging:
+# Network Diagnostics
 
-The results of Archlog.sh can be found in /var/log/archlog for closer inspection later on.
+1) Display available network devices.
+2) Check status of wpa_supplicant.
+3) Connect to a Wi-Fi network.
+
 
 # Pacman+.sh
 

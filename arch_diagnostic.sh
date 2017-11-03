@@ -78,7 +78,7 @@ UNIT=$(whiptail --inputbox "What is the unit you want to start?" 8 78 Blue --tit
 exitstatus=$?
 if [ $exitstatus = 0 ]; then
     systemctl start $UNIT
-	whiptail --msgbox "$(systemctl status $UNIT)" 15 60 4
+	whiptail --msgbox "$(systemctl start $UNIT)" 15 60 4
 	else
 		systemdDiagnostics
 	fi
@@ -92,7 +92,7 @@ UNIT=$(whiptail --inputbox "What is the unit you want to stop?" 8 78  --title "P
 exitstatus=$?
 if [ $exitstatus = 0 ]; then
     systemctl stop $UNIT
-	whiptail --msgbox "$(systemctl status $UNIT)" 15 60 4
+	whiptail --msgbox "$(systemctl stop $UNIT)" 15 60 4
 	else
 		systemdDiagnostics
 	fi
@@ -106,7 +106,7 @@ UNIT=$(whiptail --inputbox "What is the unit you want to restart?" 8 78  --title
 exitstatus=$?
 if [ $exitstatus = 0 ]; then
     systemctl restart $UNIT
-	whiptail --msgbox "$(systemctl status $UNIT)" 15 60 4
+	whiptail --msgbox "$(systemctl restart $UNIT)" 15 60 4
 	else
 		systemdDiagnostics
 	fi

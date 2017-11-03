@@ -37,24 +37,3 @@ Pacman+ is a GUI friendly way to update MorpheusArch Linux and Arch Linux.
 
 ![alt text](https://i.imgur.com/e9BuoZ4.png)
 
-# Sec_Audit.sh
-
-sec_audit.sh aids in performing a basic security audit against a server through penetration testing techniques. You'll likely need to install the tools first and have some user / pass lists for hydra's attacks.
-
-![alt text](https://i.imgur.com/QxCDQNu.png)
-
-# Nmap Tools 
-1) Full TCP port scan against a host.
-2) Verbose stealth scan.
-3) Stealth Syn with OS Detection.
-4) Stealth Syn with Full TCP range.
-5) Scan from list of hosts within a file.
-
-# Hydra Tools
-1) Get username and password lists through wget. Renaming the file as users.txt and pass.txt.
-2) Enter custom Hydra command
-3) Attack FTP service
-4) Attack SSH service.
-
-# Lynis Tools
-This option just has lynis auditing software audit the system and put the output in lynis.log within the active directory.

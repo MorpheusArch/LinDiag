@@ -46,7 +46,7 @@ LinDiag will also install Lynis and perform a full system audit when installed.
 
 ![alt text](https://i.imgur.com/cFAmy4D.png)
 
-LinDiag has extra options as well literally titled extra options this is where all the other stuff goes that might be useful along with being able to search google direct through the terminal with this.
+LinDiag has extra options as well literally titled extra options this is where all the other stuff goes that might be useful along with being able to search google direct through the terminal with this. This is also where you can git clone the latest releases of LinDiag
 
-![alt text](https://i.imgur.com/LNn8N2y.png)
+![alt text](https://i.imgur.com/ru3WLtm.png)
 

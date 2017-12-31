@@ -635,9 +635,10 @@ extraOpts(){
 OPTION=$(whiptail --title "Extra Options" --menu "Choose your option" 15 60 4 \
 "1" "32 bit or x86_64" \
 "2" "Use Google" \
-"3" "Return" \
+"3" "Check for LinDiag updates" \
+"4" "Return" \
 3>&1 1>&2 2>&3)
-	
+	https://github.com/MorpheusArch/morpheusarchtools.git
 	
 if [ "$OPTION" == '1' ]; then
 
@@ -654,6 +655,13 @@ if [ "$OPTION" == '2' ]; then
 fi
 
 if [ "$OPTION" == '3' ]; then
+	clear
+	git clone https://github.com/MorpheusArch/morpheusarchtools.git
+	extraOpts
+
+fi
+
+if [ "$OPTION" == '4' ]; then
 
 	init
 

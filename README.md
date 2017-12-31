@@ -27,7 +27,11 @@ Next in lindiags arsenal is the network diagnostics that lets you:
 1) Display all available network devices.
 2) Check the status of and restart wpa_supplicant (can also be done on systemd diagnostics).
 3) Connect to a Wi-Fi network.
-4) Run a network speed test
-5) Launch / install nmap
+4) Run a network speed test.
+5) Launch / install nmap. With verbose stealth SYN/ACK scanning & OS detection all pre-configured and ready to use
 
 ![alt text](https://i.imgur.com/AMe3wSc.png)
+
+After all thats done you need to manage some packages? No problem lindiags got you covered, and this is where the cross distro support comes into play here. Currently only Arch, Fedora and Debian based distros are supported. LinDiag checks for which package manager is in use and knows what to do from there.
+
+![alt text](https://i.imgur.com/39EojOo.png)

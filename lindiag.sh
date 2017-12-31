@@ -638,7 +638,6 @@ OPTION=$(whiptail --title "Extra Options" --menu "Choose your option" 15 60 4 \
 "3" "Check for LinDiag updates" \
 "4" "Return" \
 3>&1 1>&2 2>&3)
-	https://github.com/MorpheusArch/morpheusarchtools.git
 	
 if [ "$OPTION" == '1' ]; then
 

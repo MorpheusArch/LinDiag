@@ -35,3 +35,18 @@ Next in lindiags arsenal is the network diagnostics that lets you:
 After all thats done you need to manage some packages? No problem lindiags got you covered, and this is where the cross distro support comes into play here. Currently only Arch, Fedora and Debian based distros are supported. LinDiag checks for which package manager is in use and knows what to do from there.
 
 ![alt text](https://i.imgur.com/39EojOo.png)
+
+Next up is the Data Recovery portion of LinDiag.
+
+![alt text](https://i.imgur.com/TbhpzYo.png)
+
+It lets you display all mounted drives and attempt to use ddrescue to recover data from them with more to come.
+
+LinDiag will also install Lynis and perform a full system audit when installed.
+
+![alt text](https://i.imgur.com/cFAmy4D.png)
+
+LinDiag has extra options as well literally titled extra options this is where all the other stuff goes that might be useful along with being able to search google direct through the terminal with this.
+
+![alt text](https://i.imgur.com/LNn8N2y.png)
+

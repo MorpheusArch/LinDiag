@@ -22,3 +22,12 @@ LinDiag allows you to:
 
 ![alt text](https://i.imgur.com/xpfuCPW.png)
 
+Next in lindiags arsenal is the network diagnostics that lets you:
+
+1) Display all available network devices.
+2) Check the status of and restart wpa_supplicant (can also be done on systemd diagnostics).
+3) Connect to a Wi-Fi network.
+4) Run a network speed test
+5) Launch / install nmap
+
+![alt text](https://i.imgur.com/AMe3wSc.png)

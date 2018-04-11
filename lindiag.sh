@@ -636,7 +636,8 @@ OPTION=$(whiptail --title "Extra Options" --menu "Choose your option" 15 60 4 \
 "1" "32 bit or x86_64" \
 "2" "Use Google" \
 "3" "Check for LinDiag updates" \
-"4" "Return" \
+"4" "Generate backup of /var/log" \
+"5" "Return" \
 3>&1 1>&2 2>&3)
 	
 if [ "$OPTION" == '1' ]; then
@@ -660,7 +661,11 @@ if [ "$OPTION" == '3' ]; then
 
 fi
 
-if [ "$OPTION" == '4' ]; then
+if [ "$OPTION == '4' ]; then
+	cd /var/log
+	zip -r "archive-$(date +"%Y-%m-%d%H-%M-%S").zip" * >> /dev/null
+
+if [ "$OPTION" == '5' ]; then
 
 	init
 

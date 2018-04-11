@@ -849,7 +849,6 @@ installLynis(){
 				init
 				fi
                 
-    fi
 
 	
 }

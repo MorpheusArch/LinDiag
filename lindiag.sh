@@ -414,7 +414,7 @@ DebianPackage(){
 OPTION=$(whiptail --title "Package Management" --menu "Choose your option" 15 60 4 \
 "1" "Update System" \
 "2" "Auto Remove Packages" \
-"3" "Install A Package"
+"3" "Install A Package" \
 "4" "Return" \
 3>&1 1>&2 2>&3)
 
@@ -698,20 +698,18 @@ chkOutput(){
 #package manager is installed and directs user to appropriate function
 
 chkDistro(){
-	if [ -f /var/log/pacman.log ]; then
+    if [ -f /var/log/pacman.log ]; then
 	ArchPackage
-	else
-		if [ -d /var/log/dnf ]; then
-		FedoraPackage
-		fi 
-			if [ -d /var/log/apt ]; then
-			DebianPackage
-			else
-				whiptail --msgbox "ERROR! UNSUPPORTED PACKAGE MANAGER!" 30 120 8
-				init
-            fi
-	fi
+    fi
 
+    if [ -f /var/log/dpkg.log ]; then
+    DebianPackage
+    fi
+
+    if [ -d /var/log/dnf ]; then
+    FedoraPackage
+    fi
+    
 }
 
 ########################################################################
@@ -738,7 +736,7 @@ InstallDdrescue(){
 		dnf install ddrescue
 		DataRec
 		fi 
-			if [ if -d /var/log/apt ]; then
+			if [ if -d /var/log/dpkg.log ]; then
 			apt-get install ddrescue
 			DataRec
 			else
@@ -772,7 +770,7 @@ InstallNmap(){
 		dnf install nmap
 		nmapTools
 		fi 
-			if [ if -d /var/log/apt ]; then
+			if [ if -d /var/log/dpkg.log ]; then
 			apt-get install nmap
 			nmapTools
 			else
@@ -805,7 +803,7 @@ installLynis(){
 		dnf install lynis
 		secAudit
 		fi 
-			if [ -d /var/log/apt ]; then
+			if [ -d /var/log/dpkg.log ]; then
 			apt-get install lynis
 			secAudit
             else

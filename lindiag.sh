@@ -69,7 +69,7 @@ fi
 
 if [ "$OPTION" == '3' ]; then
 	
-	chkDistro
+	chkLinDistInit
 	
 fi
 

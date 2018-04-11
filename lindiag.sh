@@ -657,13 +657,21 @@ fi
 if [ "$OPTION" == '3' ]; then
 	clear
 	git clone https://github.com/MorpheusArch/morpheusarchtools.git
-	extraOpts
-
+    	cd morpheusarchtools
+   	 mv lindiag.sh /usr/local/bin/
+   	 chmod +x /usr/local/bin/lindiag.sh
+   	 cd ..
+ 	 rm -rf morpheusarchtools
+ 	 #./usr/local/bin/lindiag.sh# Uncomment this line if you want lindiag to kick in again
+	 extraOpts
+    
+    
 fi
 
 if [ "$OPTION" == '4' ]; then
 	cd /var/log
 	zip -r "archive-$(date +"%Y-%m-%d%H-%M-%S").zip" * >> /dev/null
+	extraOpts
 fi
 
 if [ "$OPTION" == '5' ]; then

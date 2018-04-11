@@ -697,51 +697,22 @@ chkOutput(){
 #Required for package management functions chkdistro determines which
 #package manager is installed and directs user to appropriate function
 
-chkLinDistInit(){
-    if [ pacman ]; then
+chkDistro(){
+	if [ -f /var/log/pacman.log ]; then
 	ArchPackage
 	else
-        chkLinDistDeb
-    fi
+		if [ if -d /var/log/dnf ]; then
+		FedoraPackage
+		fi 
+			if [ if -d /var/log/apt ]; then
+			DebianPackage
+			else
+				whiptail --msgbox "ERROR! UNSUPPORTED PACKAGE MANAGER!" 30 120 8
+				init
+            fi
+	fi
+
 }
-chkLinDistDeb(){
-    if [ apt-get ]; then
-	DebianPackage
-	else
-        chkLinDistFed
-    fi
-}
-chkLinDistFed(){
-    if [ dnf ]; then
-	FedoraPackage
-	else
-        whiptail --msgbox "Error!!! Unsupported Linux Distribution" 15 60 4
-        init
-    fi
-    
-}
-    
-
-
-#chkDistro(){
-	#if [ pacman ]; then
-	#ArchPackage
-	#else
-		#if [ dnf ]; then
-		#FedoraPackage
-		#fi 
-			#if [ apt-get ]; then
-			#DebianPackage
-			#fi
-				##If neither pacman, dnf or apt-get installed do this
-				#if ! pacman dnf apt-get ; then
-				#whiptail --msgbox "ERROR! UNSUPPORTED PACKAGE MANAGER!" 30 120 8
-				#init
-				#fi
-
-	#fi
-
-#}
 
 ########################################################################
 #Required for DataRec function it determines if ddrescue is already 
@@ -759,23 +730,21 @@ fi
 #Function for installing ddrescue dependant on package manager.
 
 InstallDdrescue(){
-	if [ pacman ]; then
+	if [ -f /var/log/pacman.log ]; then
 	pacman -S ddrescue
 	DataRec
 	else
-		if [ dnf ]; then
+		if [ if -d /var/log/dnf ]; then
 		dnf install ddrescue
 		DataRec
 		fi 
-			if [ apt-get ]; then
+			if [ if -d /var/log/apt ]; then
 			apt-get install ddrescue
 			DataRec
-			fi
-				#If neither pacman, dnf or apt-get installed do this
-				if ! pacman dnf apt-get ; then
+			else
 				whiptail --msgbox "ERROR! UNSUPPORTED PACKAGE MANAGER!" 30 120 8
 				init
-				fi
+            fi
 
 	fi
 }
@@ -795,24 +764,21 @@ fi
 #Installs nmap
 
 InstallNmap(){
-	if [ pacman ]; then
+	if [ -f /var/log/pacman.log ]; then
 	pacman -S nmap
 	nmapTools
 	else
-		if [ dnf ]; then
+		if [ if -d /var/log/dnf ]; then
 		dnf install nmap
 		nmapTools
 		fi 
-			if [ apt-get ]; then
+			if [ if -d /var/log/apt ]; then
 			apt-get install nmap
 			nmapTools
-			fi
-				#If neither pacman, dnf or apt-get installed do this
-				if ! pacman dnf apt-get ; then
+			else
 				whiptail --msgbox "ERROR! UNSUPPORTED PACKAGE MANAGER!" 30 120 8
-				networkDiagnostics
-				fi
-
+				init
+            fi
 	fi
 }
 
@@ -831,26 +797,21 @@ fi
 #Installs Lynis
 
 installLynis(){
-	if [ pacman ]; then
+	if [ -f /var/log/pacman.log ]; then
 	pacman -S lynis
 	secAudit
 	fi
-		if [ dnf ]; then
+		if [ -d /var/log/dnf ]; then
 		dnf install lynis
 		secAudit
 		fi 
-			if [ apt-get ]; then
+			if [ -d /var/log/apt ]; then
 			apt-get install lynis
 			secAudit
-			fi
-				#If neither pacman, dnf or apt-get installed do this
-				if ! pacman dnf apt-get ; then
+            else
 				whiptail --msgbox "ERROR! UNSUPPORTED PACKAGE MANAGER!" 30 120 8
 				init
-				fi
-                
-
-	
+            fi
 }
 
 ########################################################################

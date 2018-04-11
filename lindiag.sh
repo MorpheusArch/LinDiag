@@ -701,10 +701,10 @@ chkDistro(){
 	if [ -f /var/log/pacman.log ]; then
 	ArchPackage
 	else
-		if [ if -d /var/log/dnf ]; then
+		if [ -d /var/log/dnf ]; then
 		FedoraPackage
 		fi 
-			if [ if -d /var/log/apt ]; then
+			if [ -d /var/log/apt ]; then
 			DebianPackage
 			else
 				whiptail --msgbox "ERROR! UNSUPPORTED PACKAGE MANAGER!" 30 120 8

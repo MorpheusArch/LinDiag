@@ -46,7 +46,7 @@ fi
 #-- init is the main menu
 
 init(){
-OPTION=$(whiptail --title "lindiag.sh" --menu "Choose your option" 15 60 4 \
+OPTION=$(whiptail --title "lindiag.sh" --backtitle "2018.04.11" --menu "Choose your option" 15 60 4 \
 "1" "Systemd Diagnostics" \
 "2" "Network Diagnostics" \
 "3" "Package Manager" \
@@ -657,13 +657,13 @@ fi
 if [ "$OPTION" == '3' ]; then
 	clear
 	git clone https://github.com/MorpheusArch/morpheusarchtools.git
-    	cd morpheusarchtools
-   	 mv lindiag.sh /usr/local/bin/
-   	 chmod +x /usr/local/bin/lindiag.sh
-   	 cd ..
- 	 rm -rf morpheusarchtools
- 	 #./usr/local/bin/lindiag.sh# Uncomment this line if you want lindiag to kick in again
-	 extraOpts
+    cd morpheusarchtools
+    mv lindiag.sh /usr/local/bin/
+    chmod +x /usr/local/bin/lindiag.sh
+    cd ..
+    rm -rf morpheusarchtools
+    #./usr/local/bin/lindiag.sh#
+    extraOpts
     
     
 fi
@@ -671,7 +671,6 @@ fi
 if [ "$OPTION" == '4' ]; then
 	cd /var/log
 	zip -r "archive-$(date +"%Y-%m-%d%H-%M-%S").zip" * >> /dev/null
-	extraOpts
 fi
 
 if [ "$OPTION" == '5' ]; then
@@ -698,25 +697,51 @@ chkOutput(){
 #Required for package management functions chkdistro determines which
 #package manager is installed and directs user to appropriate function
 
-chkDistro(){
-	if [ pacman ]; then
+chkLinDistInit(){
+    if [ pacman ]; then
 	ArchPackage
 	else
-		if [ dnf ]; then
-		FedoraPackage
-		fi 
-			if [ apt-get ]; then
-			DebianPackage
-			fi
-				#If neither pacman, dnf or apt-get installed do this
-				if ! pacman dnf apt-get ; then
-				whiptail --msgbox "ERROR! UNSUPPORTED PACKAGE MANAGER!" 30 120 8
-				init
-				fi
-
-	fi
-
+        chkLinDistDeb
+    fi
 }
+chkLinDistDeb(){
+    if [ apt-get ]; then
+	DebianPackage
+	else
+        chkLinDistFed
+    fi
+}
+chkLinDistFed(){
+    if [ dnf ]; then
+	FedoraPackage
+	else
+        whiptail --msgbox "Error!!! Unsupported Linux Distribution" 15 60 4
+        init
+    fi
+    
+    
+    
+
+
+#chkDistro(){
+	#if [ pacman ]; then
+	#ArchPackage
+	#else
+		#if [ dnf ]; then
+		#FedoraPackage
+		#fi 
+			#if [ apt-get ]; then
+			#DebianPackage
+			#fi
+				##If neither pacman, dnf or apt-get installed do this
+				#if ! pacman dnf apt-get ; then
+				#whiptail --msgbox "ERROR! UNSUPPORTED PACKAGE MANAGER!" 30 120 8
+				#init
+				#fi
+
+	#fi
+
+#}
 
 ########################################################################
 #Required for DataRec function it determines if ddrescue is already 
@@ -809,7 +834,7 @@ installLynis(){
 	if [ pacman ]; then
 	pacman -S lynis
 	secAudit
-	else
+	fi
 		if [ dnf ]; then
 		dnf install lynis
 		secAudit
@@ -823,8 +848,9 @@ installLynis(){
 				whiptail --msgbox "ERROR! UNSUPPORTED PACKAGE MANAGER!" 30 120 8
 				init
 				fi
+                
+    fi
 
-	fi
 	
 }
 

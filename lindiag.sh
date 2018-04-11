@@ -664,6 +664,7 @@ fi
 if [ "$OPTION == '4' ]; then
 	cd /var/log
 	zip -r "archive-$(date +"%Y-%m-%d%H-%M-%S").zip" * >> /dev/null
+fi
 
 if [ "$OPTION" == '5' ]; then
 

@@ -15,13 +15,13 @@
 
 #Author
 #Mark Chisholm
-#http://morpheusarch.co.uk 
+#http://morpheusarch.co.uk
 
 ########################################################################
 #-- authCheck asks for adminstrator aka root priveleges
 
 authCheck(){
-	
+
 	if [ $(id -u) != "0" ]; then
 		clear
         echo "You must be root to run this script"
@@ -43,14 +43,14 @@ else #if the /var/log/lindiag directory does not exist this creates it
 	mkdir /var/log/lindiag >> /dev/null 2>&1
 	init
 fi
-		
+
 }
 
 ########################################################################
 #-- init is the main menu
 
 init(){
-OPTION=$(whiptail --title "lindiag.sh" --backtitle "2018.04.11" --menu "Choose your option" 15 60 4 \
+OPTION=$(whiptail --title "lindiag.sh" --backtitle "2018.2" --menu "Choose your option" 15 60 4 \
 "1" "Systemd Diagnostics" \
 "2" "Network Diagnostics" \
 "3" "Package Manager" \
@@ -60,40 +60,40 @@ OPTION=$(whiptail --title "lindiag.sh" --backtitle "2018.04.11" --menu "Choose y
 3>&1 1>&2 2>&3)
 
 if [ "$OPTION" == '1' ]; then
-	
+
 	systemdDiagnostics
-	
+
 fi
 
 if [ "$OPTION" == '2' ]; then
-	
+
 	networkDiagnostics
-	
+
 fi
 
 if [ "$OPTION" == '3' ]; then
-	
+
 	chkDistro
-	
+
 fi
 
 if [ "$OPTION" == '4' ]; then
-	
+
 	chkDdrescue
-	
+
 fi
 
 if [ "$OPTION" == '5' ]; then
-	
+
 	chkLynis
-	
-fi	
+
+fi
 
 if [ "$OPTION" == '6' ]; then
-	
+
 	extraOpts
-	
-fi	
+
+fi
 }
 
 ########################################################################
@@ -107,18 +107,19 @@ OPTION=$(whiptail --title "Systemd_Diagnostics" --menu "Choose your option" 15 6
 "5" "Check if a unit is enabled or not" \
 "6" "Enable a unit at boot" \
 "7" "Show man page of unit" \
-"8" "Return" \
+"8" "Show Systemd status" \
+"9" "Return" \
 3>&1 1>&2 2>&3)
 
 if [ "$OPTION" == '1' ]; then
-	
+
 	whiptail --msgbox "$(systemctl --failed)" 15 60 4
 	systemdDiagnostics
-	
+
 fi
 
 if [ "$OPTION" == '2' ]; then
-	
+
 UNIT=$(whiptail --inputbox "What is the unit you want to start?" 8 78 --title "Please enter name of unit" 3>&1 1>&2 2>&3)
 
 exitstatus=$?
@@ -128,11 +129,11 @@ if [ $exitstatus = 0 ]; then
 	else
 		systemdDiagnostics
 	fi
-    
+
 fi
 
 if [ "$OPTION" == '3' ]; then
-	
+
 UNIT=$(whiptail --inputbox "What is the unit you want to stop?" 8 78  --title "Please enter name of unit" 3>&1 1>&2 2>&3)
 
 exitstatus=$?
@@ -142,11 +143,11 @@ if [ $exitstatus = 0 ]; then
 	else
 		systemdDiagnostics
 	fi
-    
+
 fi
 
 if [ "$OPTION" == '4' ]; then
-	
+
 UNIT=$(whiptail --inputbox "What is the unit you want to restart?" 8 78  --title "Please enter name of unit" 3>&1 1>&2 2>&3)
 
 exitstatus=$?
@@ -156,11 +157,11 @@ if [ $exitstatus = 0 ]; then
 	else
 		systemdDiagnostics
 	fi
-    
+
 fi
 
 if [ "$OPTION" == '5' ]; then
-	
+
 UNIT=$(whiptail --inputbox "What is the unit you want to check?" 8 78  --title "Please enter name of unit" 3>&1 1>&2 2>&3)
 
 exitstatus=$?
@@ -169,11 +170,11 @@ if [ $exitstatus = 0 ]; then
 	else
 		systemdDiagnostics
 	fi
-    
+
 fi
 
 if [ "$OPTION" == '6' ]; then
-	
+
 UNIT=$(whiptail --inputbox "What is the unit you want to enable at boot?" 8 78  --title "Please enter name of unit" 3>&1 1>&2 2>&3)
 
 exitstatus=$?
@@ -182,11 +183,11 @@ if [ $exitstatus = 0 ]; then
 	else
 		systemdDiagnostics
 	fi
-    
+
 fi
 
 if [ "$OPTION" == '7' ]; then
-	
+
 UNIT=$(whiptail --inputbox "What is the unit you want to see man page for?" 8 78  --title "Please enter name of unit" 3>&1 1>&2 2>&3)
 
 exitstatus=$?
@@ -196,13 +197,21 @@ if [ $exitstatus = 0 ]; then
 	else
 		systemdDiagnostics
 	fi
-    
+
 fi
 
 if [ "$OPTION" == '8' ]; then
-	
+
+	whiptail --msgbox "Press Q to Quit and return to LinDiag" 15 60 4
+	systemctl status
+	systemdDiagnostics
+
+fi
+
+if [ "$OPTION" == '9' ]; then
+
 	init
-    
+
 fi
 }
 
@@ -220,36 +229,36 @@ OPTION=$(whiptail --title "Network Diagnostics" --menu "Choose your option" 15 6
 3>&1 1>&2 2>&3)
 
 if [ "$OPTION" == '1' ]; then
-	
+
 	whiptail --msgbox "$(ip link show)" 15 60 4
 	networkDiagnostics
-	    
+
 fi
 
 if [ "$OPTION" == '2' ]; then
-	
+
 	systemctl restart wpa_supplicant
 	whiptail --msgbox "$(wpa_supplicant restarted)" 15 60 4
 	networkDiagnostics
-	    
+
 fi
 
 if [ "$OPTION" == '3' ]; then
-	
+
 	whiptail --msgbox "$(systemctl status wpa_supplicant)" 15 60 4
 	networkDiagnostics
-	    
+
 fi
 
 if [ "$OPTION" == '4' ]; then
-	
+
 	wifi-menu
 	networkDiagnostics
-	    
+
 fi
 
 if [ "$OPTION" == '5' ]; then
-	
+
 	curl -s  https://raw.githubusercontent.com/sivel/speedtest-cli/master/speedtest.py | python - >> /var/log/lindiag/netspeed.log &
     local pid=$!
     local delay=0.02
@@ -268,21 +277,21 @@ if [ "$OPTION" == '5' ]; then
     printf "    \b\b\b\b"
 
 	chkOutput
-	    
+
 fi
 
 if [ "$OPTION" == '6' ]; then
-	
+
 	chkNmap
-    
+
 fi
 
 if [ "$OPTION" == '7' ]; then
-	
+
 	init
-    
+
 fi
-	
+
 }
 
 ########################################################################
@@ -293,19 +302,20 @@ OPTION=$(whiptail --title "Package Management" --menu "Choose your option" 15 60
 "2" "Clear Pacman Cache" \
 "3" "Rank Mirrors" \
 "4" "Install A Package" \
-"5" "Return" \
+"5" "LinDiag Mirrorlist Retriever" \
+"6" "Return" \
 3>&1 1>&2 2>&3)
 
 if [ "$OPTION" == '1' ]; then
-	
+
 	clear
 	pacman -Syu
 	ArchPackage
-    
+
 fi
 
 if [ "$OPTION" == '2' ]; then
-	
+
 if (whiptail --title "WARNING!" --yesno "Only do this when certain that previous package versions are not required, for example for a later downgrade. Would you like to continue?" 8 78) then
     clear
     pacman -Sc
@@ -313,27 +323,37 @@ if (whiptail --title "WARNING!" --yesno "Only do this when certain that previous
 else
     ArchPackage
 fi
-    
+
 fi
 
 if [ "$OPTION" == '3' ]; then
-	
-	clear
-	echo ""
-	echo "Generating backup of /etc/pacman.d/mirrorlist"
-	echo ""
-	
-	sudo cp /etc/pacman.d/mirrorlist /etc/pacman.d/mirrorlist.backup
-	sudo sed -i 's/^#Server/Server/' /etc/pacman.d/mirrorlist.backup
-	sudo rankmirrors -n 6 /etc/pacman.d/mirrorlist.backup > /etc/pacman.d/mirrorlist
-	
-	echo ""
-	echo "Refreshing Mirrors"
-	echo ""
-	
-	sudo pacman -Syyu
-	ArchPackage
-    
+
+	if [ rankmirrors ]; then
+		clear
+		echo ""
+		echo "Generating backup of /etc/pacman.d/mirrorlist"
+		echo ""
+		sudo cp /etc/pacman.d/mirrorlist /etc/pacman.d/mirrorlist.backup
+		sudo sed -i 's/^#Server/Server/' /etc/pacman.d/mirrorlist.backup
+		sudo rankmirrors -n 6 /etc/pacman.d/mirrorlist.backup > /etc/pacman.d/mirrorlist
+		echo ""
+		echo "Refreshing Mirrors"
+		echo ""
+		sudo pacman -Syyu
+		ArchPackage
+	else
+		clear
+		pacman -S pacman-contrib
+		echo ""
+		echo "Generating backup of /etc/pacman.d/mirrorlist"
+		echo ""
+		sudo cp /etc/pacman.d/mirrorlist /etc/pacman.d/mirrorlist.backup
+		sudo sed -i 's/^#Server/Server/' /etc/pacman.d/mirrorlist.backup
+		sudo rankmirrors -n 6 /etc/pacman.d/mirrorlist.backup > /etc/pacman.d/mirrorlist
+		echo ""
+		echo "Refreshing Mirrors"
+		echo ""
+	fi
 fi
 
 if [ "$OPTION" == '4' ]; then
@@ -346,15 +366,28 @@ exitstatus=$?
 	else
 		ArchPackage
 	fi
-    
+
 fi
 
 if [ "$OPTION" == '5' ]; then
-	
-	init
-    
+
+	clear
+	wget -O mirrorlist_all_https https://www.archlinux.org/mirrorlist/all/https/
+	wget -O mirrorlist_all_http http://www.archlinux.org/mirrorlist/all/http/
+	wget -O mirrorlist_all_https_IPv4_IPv6_MirrorStatus_On https://www.archlinux.org/mirrorlist/?country=all&protocol=http&protocol=https&ip_version=4&ip_version=6&use_mirror_status=on
+	sudo cp /etc/pacman.d/mirrorlist /etc/pacman.d/mirrorlist.LinDiagbackup
+	clear
+	sleep 1 #small sanity check
+	ArchPackage
+
 fi
-	
+
+if [ "$OPTION" == '6' ]; then
+
+	init
+
+fi
+
 }
 
 ########################################################################
@@ -369,27 +402,27 @@ OPTION=$(whiptail --title "Package Management" --menu "Choose your option" 15 60
 3>&1 1>&2 2>&3)
 
 if [ "$OPTION" == '1' ]; then
-	
+
 	clear
 	dnf upgrade
 	FedoraPackage
-    
+
 fi
 
 if [ "$OPTION" == '2' ]; then
-	
+
 	clear
 	dnf autoremove
 	FedoraPackage
-    
+
 fi
 
 if [ "$OPTION" == '3' ]; then
-	
+
 	clear
 	dnf clean all
 	FedoraPackage
-    
+
 fi
 
 if [ "$OPTION" == '4' ]; then
@@ -404,11 +437,11 @@ exitstatus=$?
 	fi
 
 fi
-	
+
 if [ "$OPTION" == '5' ]; then
 
 	init
-    
+
 fi
 }
 
@@ -423,19 +456,19 @@ OPTION=$(whiptail --title "Package Management" --menu "Choose your option" 15 60
 3>&1 1>&2 2>&3)
 
 if [ "$OPTION" == '1' ]; then
-	
+
 	clear
 	apt-get update && apt-get upgrade
 	DebianPackage
-    
+
 fi
 
 if [ "$OPTION" == '2' ]; then
-	
+
 	clear
 	apt-get autoremove
 	DebianPackage
-    
+
 fi
 
 if [ "$OPTION" == '3' ]; then
@@ -448,13 +481,13 @@ exitstatus=$?
 	else
 		DebianPackage
 	fi
-    
+
 fi
 
 if [ "$OPTION" == '4' ]; then
-	
+
 	init
-    
+
 fi
 
 
@@ -470,7 +503,7 @@ OPTION=$(whiptail --title "Data Recovery" --menu "Choose your option" 15 60 4 \
 3>&1 1>&2 2>&3)
 
 if [ "$OPTION" == '1' ]; then
-	
+
 	clear
 	whiptail --msgbox "$(lsblk -o name,label,size,fstype,model)" 20 40
 	DataRec
@@ -505,7 +538,7 @@ if [ $exitstatus = 0 ]; then
 	else
 		DataRec
 	fi
-    
+
 else
     DataRec
 fi
@@ -523,7 +556,7 @@ if [ $exitstatus = 0 ]; then
 	else
 		DataRec
 	fi
-    
+
 else
     DataRec
 fi
@@ -553,7 +586,7 @@ nmapTools(){
 	3>&1 1>&2 2>&3)
 
 if [ "$OPTION" == '1' ]; then
-	
+
 	TARGET=$(whiptail --inputbox "Enter IP address or hostname" 8 78 --title "Enter target" 3>&1 1>&2 2>&3)
 	exitstatus=$?
 	if [ $exitstatus = 0 ]; then
@@ -562,11 +595,11 @@ if [ "$OPTION" == '1' ]; then
 	else
 		nmapTools
 	fi
-	
+
 fi
 
 if [ "$OPTION" == '2' ]; then
-	
+
 	TARGET=$(whiptail --inputbox "Enter IP address or hostname" 8 78 --title "Enter target" 3>&1 1>&2 2>&3)
 	exitstatus=$?
 	if [ $exitstatus = 0 ]; then
@@ -575,11 +608,11 @@ if [ "$OPTION" == '2' ]; then
 	else
 		nmapTools
 	fi
-	
+
 fi
 
 if [ "$OPTION" == '3' ]; then
-	
+
 	TARGET=$(whiptail --inputbox "Enter IP address or hostname" 8 78 --title "Enter target" 3>&1 1>&2 2>&3)
 	exitstatus=$?
 	if [ $exitstatus = 0 ]; then
@@ -588,11 +621,11 @@ if [ "$OPTION" == '3' ]; then
 	else
 		nmapTools
 	fi
-	
+
 fi
 
 if [ "$OPTION" == '4' ]; then
-	
+
 	TARGET=$(whiptail --inputbox "Enter IP address or hostname" 8 78 --title "Enter target" 3>&1 1>&2 2>&3)
 	exitstatus=$?
 	if [ $exitstatus = 0 ]; then
@@ -601,11 +634,11 @@ if [ "$OPTION" == '4' ]; then
 	else
 		nmapTools
 	fi
-	
+
 fi
 
 if [ "$OPTION" == '5' ]; then
-	
+
 	TARGET=$(whiptail --inputbox "Enter file with full path" 8 78 --title "Enter file with IP's you wish to scan" 3>&1 1>&2 2>&3)
 	exitstatus=$?
 	if [ $exitstatus = 0 ]; then
@@ -614,7 +647,7 @@ if [ "$OPTION" == '5' ]; then
 	else
 		nmapTools
 	fi
-	
+
 fi
 
 if [ "$OPTION" == '6' ]; then
@@ -626,12 +659,12 @@ fi
 }
 
 secAudit(){
-	
-	clear	
+
+	clear
 	lynis audit system | tee lynis.log
 	cp lynis.log /var/log/lindiag
 	init
-	
+
 }
 
 
@@ -643,16 +676,13 @@ OPTION=$(whiptail --title "Extra Options" --menu "Choose your option" 15 60 4 \
 "4" "Generate backup of /var/log" \
 "5" "Return" \
 3>&1 1>&2 2>&3)
-	
-if [ "$OPTION" == '1' ]; then
 
+if [ "$OPTION" == '1' ]; then
 	whiptail --msgbox "$(uname -m)" 15 60 4
 	extraOpts
-
 fi
 
 if [ "$OPTION" == '2' ]; then
-	
 	INPUT=$(whiptail --inputbox "Enter search query" 8 78 --title "Use Google" 3>&1 1>&2 2>&3)
 	lynx https://www.google.co.uk/search?q=$INPUT
 	extraOpts
@@ -668,26 +698,24 @@ if [ "$OPTION" == '3' ]; then
     rm -rf morpheusarchtools
     #./usr/local/bin/lindiag.sh#
     extraOpts
-    
-    
 fi
 
 if [ "$OPTION" == '4' ]; then
 	cd /var/log
 	zip -r "archive-$(date +"%Y-%m-%d%H-%M-%S").zip" * >> /dev/null
+	mkdir /var/log/LinDiag_Backups
+	mv *.zip /var/log/LinDiag_Backups
+	extraOpts
 fi
 
 if [ "$OPTION" == '5' ]; then
 
 	init
-
 fi
 }
 ########################################################################
 #Auxillary functions. The functions here are required by others in order
 #to work.
-########################################################################
-
 ########################################################################
 #chkOutput is required for network diagnostic speedtest
 
@@ -713,11 +741,11 @@ chkDistro(){
     if [ -d /var/log/dnf ]; then
     FedoraPackage
     fi
-    
+
 }
 
 ########################################################################
-#Required for DataRec function it determines if ddrescue is already 
+#Required for DataRec function it determines if ddrescue is already
 #installed and allows the user to install it.
 
 chkDdrescue(){
@@ -739,7 +767,7 @@ InstallDdrescue(){
 		if [ if -d /var/log/dnf ]; then
 		dnf install ddrescue
 		DataRec
-		fi 
+		fi
 			if [ if -d /var/log/dpkg.log ]; then
 			apt-get install ddrescue
 			DataRec
@@ -773,7 +801,7 @@ InstallNmap(){
 		if [ if -d /var/log/dnf ]; then
 		dnf install nmap
 		nmapTools
-		fi 
+		fi
 			if [ if -d /var/log/dpkg.log ]; then
 			apt-get install nmap
 			nmapTools
@@ -806,7 +834,7 @@ installLynis(){
 		if [ -d /var/log/dnf ]; then
 		dnf install lynis
 		secAudit
-		fi 
+		fi
 			if [ -d /var/log/dpkg.log ]; then
 			apt-get install lynis
 			secAudit

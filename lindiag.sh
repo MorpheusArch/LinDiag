@@ -50,12 +50,12 @@ fi
 #-- init is the main menu
 
 init(){
-OPTION=$(whiptail --title "lindiag.sh" --backtitle "2018.2" --menu "Choose your option" 15 60 4 \
+OPTION=$(whiptail --title "lindiag.sh" --backtitle "2018.4" --menu "Choose your option" 15 60 4 \
 "1" "Systemd Diagnostics" \
 "2" "Network Diagnostics" \
-"3" "Package Manager" \
-"4" "Data Recovery" \
-"5" "Security Audit" \
+"3" "Network Mapper" \
+"4" "Package Manager" \
+"5" "Data Recovery" \
 "6" "Extra Options" \
 3>&1 1>&2 2>&3)
 
@@ -71,21 +71,22 @@ if [ "$OPTION" == '2' ]; then
 
 fi
 
+
 if [ "$OPTION" == '3' ]; then
 
-	chkDistro
+	chkNmap
 
 fi
 
 if [ "$OPTION" == '4' ]; then
 
-	chkDdrescue
+	chkDistro
 
 fi
 
 if [ "$OPTION" == '5' ]; then
 
-	chkLynis
+	chkDdrescue
 
 fi
 
@@ -224,8 +225,7 @@ OPTION=$(whiptail --title "Network Diagnostics" --menu "Choose your option" 15 6
 "3" "Check status of wpa_supplicant" \
 "4" "Connect to WiFi network" \
 "5" "Run Network Speed Test" \
-"6" "Network Mapper" \
-"7" "Return" \
+"6" "Return" \
 3>&1 1>&2 2>&3)
 
 if [ "$OPTION" == '1' ]; then
@@ -281,12 +281,6 @@ if [ "$OPTION" == '5' ]; then
 fi
 
 if [ "$OPTION" == '6' ]; then
-
-	chkNmap
-
-fi
-
-if [ "$OPTION" == '7' ]; then
 
 	init
 
@@ -658,16 +652,6 @@ fi
 
 }
 
-secAudit(){
-
-	clear
-	lynis audit system | tee lynis.log
-	cp lynis.log /var/log/lindiag
-	init
-
-}
-
-
 extraOpts(){
 OPTION=$(whiptail --title "Extra Options" --menu "Choose your option" 15 60 4 \
 "1" "32 bit or x86_64" \
@@ -811,39 +795,6 @@ InstallNmap(){
             fi
 	fi
 }
-
-########################################################################
-#chkLynis required for security audit
-
-chkLynis(){
-if [ lynis ]; then
-	secAudit
-else
-	installLynis
-fi
-}
-
-########################################################################
-#Installs Lynis
-
-installLynis(){
-	if [ -f /var/log/pacman.log ]; then
-	pacman -S lynis
-	secAudit
-	fi
-		if [ -d /var/log/dnf ]; then
-		dnf install lynis
-		secAudit
-		fi
-			if [ -d /var/log/dpkg.log ]; then
-			apt-get install lynis
-			secAudit
-            else
-				whiptail --msgbox "ERROR! UNSUPPORTED PACKAGE MANAGER!" 30 120 8
-				init
-            fi
-}
-
 ########################################################################
 #End auxillary functions
 

@@ -1,11 +1,8 @@
-# morpheusarchtools
-Previously a collection of tools that has recently been merged to one file. Intended to be used with MorpheusArch Linux however a standard Arch Linux system is supported along with Debian / Fedora based linux distributions.
-
-If you're getting a permission denied error. You may need to make the shell scripts executable with the command:
-chmod +x <name_of_file_>
-
 # lindiag.sh
 ![alt text](https://i.imgur.com/CVdNfjL.png)
+
+If you're getting a permission denied error. You may need to make the shell scripts executable with the command:
+chmod +x lindiag.sh
 
 Previously MorpheusArch tools was split up into seperate .sh files each with their own use. Now everything has been merged into one file called lindiag.sh.
 

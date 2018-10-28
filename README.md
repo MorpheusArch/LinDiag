@@ -39,10 +39,6 @@ Next up is the Data Recovery portion of LinDiag.
 
 It lets you display all mounted drives and attempt to use ddrescue to recover data from them with more to come.
 
-LinDiag will also install Lynis and perform a full system audit when installed.
-
-![alt text](https://i.imgur.com/cFAmy4D.png)
-
 LinDiag has extra options as well literally titled extra options this is where all the other stuff goes that might be useful along with being able to search google direct through the terminal with this. This is also where you can git clone the latest releases of LinDiag
 
 ![alt text](https://i.imgur.com/ru3WLtm.png)

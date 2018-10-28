@@ -53,10 +53,11 @@ init(){
 OPTION=$(whiptail --title "lindiag.sh" --backtitle "2018.4" --menu "Choose your option" 15 60 4 \
 "1" "Systemd Diagnostics" \
 "2" "Network Diagnostics" \
-"3" "Network Mapper" \
-"4" "Package Manager" \
-"5" "Data Recovery" \
-"6" "Extra Options" \
+"3" "Server Configuration" \
+"4" "Network Mapper" \
+"5" "Package Manager" \
+"6" "Data Recovery" \
+"7" "Extra Options" \
 3>&1 1>&2 2>&3)
 
 if [ "$OPTION" == '1' ]; then
@@ -71,26 +72,32 @@ if [ "$OPTION" == '2' ]; then
 
 fi
 
-
 if [ "$OPTION" == '3' ]; then
+
+	serverConfig
+
+fi
+
+
+if [ "$OPTION" == '4' ]; then
 
 	chkNmap
 
 fi
 
-if [ "$OPTION" == '4' ]; then
+if [ "$OPTION" == '5' ]; then
 
 	chkDistro
 
 fi
 
-if [ "$OPTION" == '5' ]; then
+if [ "$OPTION" == '6' ]; then
 
 	chkDdrescue
 
 fi
 
-if [ "$OPTION" == '6' ]; then
+if [ "$OPTION" == '7' ]; then
 
 	extraOpts
 
@@ -225,7 +232,8 @@ OPTION=$(whiptail --title "Network Diagnostics" --menu "Choose your option" 15 6
 "3" "Check status of wpa_supplicant" \
 "4" "Connect to WiFi network" \
 "5" "Run Network Speed Test" \
-"6" "Return" \
+"6" "Firewall Configuration" \
+"7" "Return" \
 3>&1 1>&2 2>&3)
 
 if [ "$OPTION" == '1' ]; then
@@ -282,6 +290,12 @@ fi
 
 if [ "$OPTION" == '6' ]; then
 
+	FirewallConfig
+
+fi
+
+if [ "$OPTION" == '7' ]; then
+
 	init
 
 fi
@@ -289,7 +303,102 @@ fi
 }
 
 ########################################################################
+serverConfig(){
+OPTION=$(whiptail --title "Server Configuration" --menu "Choose your option" 15 60 4 \
+"1" "Install LAMP" \
+"2" "Install Wordpress" \
+"3" "Return" \
+3>&1 1>&2 2>&3)
 
+if [ "$OPTION" == '1' ]; then
+	    if [ -f /var/log/pacman.log ]; then
+				pacman -Syu
+				pacman -S apache php mariadb
+				mysql_secure_installation
+				serverConfig
+	    fi
+
+	    if [ -f /var/log/dpkg.log ]; then
+				apt-get update
+				apt-get upgrade
+	    	apt-get install apache2 apache2-doc mysql-server mysql-client php php-mysql
+				mysql_secure_installation
+				serverConfig
+	    fi
+
+	    if [ -d /var/log/dnf ]; then
+	    dnf update
+			dnf install httpd mariadb-server
+			mysql_secure_installation
+			dnf install php php-common
+			dnf install php-mysql php-pdo php-gd php-mbstring
+			serverConfig
+	    fi
+
+
+  fi
+	if [ "$OPTION" == '2' ]; then
+		    if [ -f /var/log/pacman.log ]; then
+					pacman -Syu
+					pacman -S wordpress
+					mysql_secure_installation
+					serverConfig
+		    fi
+
+		    if [ -f /var/log/dpkg.log ]; then
+					apt-get update
+					apt-get upgrade
+		    	apt-get install wordpress curl apache2 mariadb-server
+					mysql_secure_installation
+					serverConfig
+		    fi
+
+		    if [ -d /var/log/dnf ]; then
+		    dnf update
+				dnf install wordpress php-mysqlnd mariadb-server
+				serverConfig
+		    fi
+  fi
+
+if [ "$OPTION" == '3' ]; then
+	init
+fi
+}
+
+########################################################################
+
+FirewallConfig(){
+OPTION=$(whiptail --title "Firewall Configuration" --menu "Choose your option" 15 60 4 \
+"1" "List IPv4 Rules" \
+"2" "List IPv6 Rules" \
+"3" "List All Rules" \
+3>&1 1>&2 2>&3)
+
+if [ "$OPTION" == '1' ]; then
+
+	clear
+  whiptail --msgbox "$(iptables -S)" 15 60 4
+	FirewallConfig
+
+fi
+
+if [ "$OPTION" == '2' ]; then
+
+	clear
+	whiptail --msgbox "$(ip6tables -S)" 15 60 4
+	FirewallConfig
+
+fi
+
+if [ "$OPTION" == '3' ]; then
+
+	clear
+	whiptail --msgbox "$(iptables -L -v -n | more)" 15 60 4
+	FirewallConfig
+
+fi
+
+}
 ArchPackage(){
 OPTION=$(whiptail --title "Package Management" --menu "Choose your option" 15 60 4 \
 "1" "Update System" \

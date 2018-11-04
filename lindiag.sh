@@ -15,7 +15,7 @@
 
 #Author
 #Mark Chisholm
-#http://morpheusarch.co.uk
+#http://morpheusarchlinux.com
 
 ########################################################################
 #-- authCheck asks for adminstrator aka root priveleges
